@@ -1,0 +1,40 @@
+<!DOCTYPE>
+<html manifest="manifest.appcache">
+    <head>
+        <title>Topheman Bombs v<%= version %> - build<%= buildNumber %></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta name="apple-touch-fullscreen" content="yes" />
+        <meta name=viewport content="width=device-width,user-scalable=no" />
+        <link rel="stylesheet" type="text/css" href="./css/game.css" />
+    </head>
+    <body>
+        <div id="orientationlock">Please lock your device in portrait mode to use this game.</div>
+        <canvas width="400" height="600" id="myCanvas"></canvas>
+        <!-- downloading the build (with requirejs included), then require the main module and lauchn it via a require -->
+        <script src="./js/game/bootstrap.js"></script>
+        <script type="text/javascript">
+            if( ( (!window.DeviceMotionEvent && !window.DeviceOrientationEvent) || (!("ontouchstart" in window) && !window.DeviceMotionEvent) || (!("ontouchstart" in window) && !window.DeviceOrientationEvent) ) && window.location.search === "?emulate" ){
+                require(['js/vendor/device-motion-polyfill','game/bootstrap'], function(undefined,bootstrap) {
+                    bootstrap.init();
+                });
+            }
+            else{
+                require(['game/bootstrap'], function(bootstrap) {
+                    bootstrap.init();
+                });
+            }
+            //google analytic
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-868601-7']);
+            _gaq.push(['_trackPageview']);
+
+            (function() {
+                  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
+    </body>
+</html>

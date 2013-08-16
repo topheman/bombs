@@ -1,0 +1,47 @@
+body {
+    font-family: Arial,sans-serif;
+    margin:0px;
+    padding:0px;
+    background:white;
+}
+#content{
+}
+
+#orientationlock {
+    font-style: italic;
+    font-weight: bold;
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: #333;
+    color: #fff;
+    font-size: 1.2em;
+    padding: 1em;
+    padding-top: 1em;
+    display: none;
+    text-align: center;
+    background-image: url(img/orientation-lock.png);
+    background-repeat: no-repeat;
+    background-position: 50% 80%;
+}
+
+@media screen and (orientation:landscape) {
+    #orientationlock {
+        display: block;
+    }
+    #myCanvas{
+        display:none;
+    }
+}
+@media screen and (orientation:portrait) {
+    #orientationlock {
+        display: none;
+    }
+}
+
+canvas{
+    background: white;
+}

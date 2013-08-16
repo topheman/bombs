@@ -1,0 +1,88 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <title>Topheman Bombs v<%= version %> - HTML5/Javascript Game - build<%= buildNumber %></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta name=viewport content="initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="./css/index.css" />
+    </head>
+    <body>
+        <span id="forkongithub"><a href="https://github.com/topheman/bombs">Fork me on GitHub</a></span>
+        <div id="container">
+            <header id="header">
+                <div id="tweet-this-link">
+                    <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://bombs.topheman.com" data-text="#HTML5 #JavaScript #game" data-via="topheman" data-lang="fr" data-size="large" data-count="none">Tweeter</a>
+                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                </div>
+                <h1>Topheman Bombs</h1>
+                <div id="intro" class="game-link-wrapper technos">
+                    <a id="go-play" class="game-link technos" href="./game.html" title="Play Topheman Bombs in the browser">Play on your browser<br /></a>
+                </div>
+            </header>
+            <div id="body">
+                <h2 id="introduction">Introduction</h2>
+                <div id="qr-code"></div>
+                <div>
+                    <p>Topheman Bombs is a free <strong>HTML5 / Javascript game</strong> that takes advantage of the canvas element and the <strong>accelerometer</strong> on your device.<br>
+                    It's using <a href="https://github.com/topheman/Ball.js" title="Ball.js on github">Ball.js</a>, a game engine I made that handles physics interactions between balls as rendering.</p>
+                    <p>You can <strong>play offline</strong> (in the subway or whatever ...), or on your <strong>desktop browser via the emulator</strong> !</p>
+                    <ul>
+                        <li>Tilt your device to manage the blue dot</li>
+                        <li>Tap the screen to drop bombs on the enemies (red dots)</li>
+                        <li>Grab the green dots to get more bombs</li>
+                    </ul>
+                </div>
+                <h2 id="story">Story of a new version ...</h2>
+                <p>Topheman Bombs has been written in mid 2012. It ran only on <strong>Apple devices browsers</strong> and I made an <strong>Android app with phoneGap</strong> to fill the void of the Android browsers at the time.</p>
+                <p>Now that this gap is filled, I reviewed my code to make a full HTML5 app with these new features (more on the <a href="https://github.com/topheman/bombs/blob/master/CHANGELOG.md" title="Topheman Bombs v2 changelog">changelog</a>) :</p>
+                <ul>
+                    <li>Offline gaming</li>
+                    <li>Optimized build files</li>
+                    <li>Accelerometer emulator on desktop - <strong>Big thanks to : </strong> <a href="http://remote-tilt.com/">remote-tilt.com</a></li>
+                </ul>
+                <h2 id="more-infos">More Infos ...</h2>
+                <ul>
+                    <li><a href="https://github.com/topheman/bombs" title="Topheman bombs github repo">The github repo of Topheman bombs</a></li>
+                    <li><a href="http://blog.topheman.com/2012/04/01/topheman-bombs-html5-javascript-android-game/" title="Topheman bombs on my blog">The blog post on Topheman Bombs v1</a></li>
+                    <li>Comming : the blog post on Topheman v2</li>
+                    <li>Developers, I invite you to take a look at the <a href="https://github.com/topheman/bombs/blob/master/GRUNTWORKFLOW.md" title="grunt.js workflow explanation">grunt workflow</a> I made up</li>
+                </ul>
+            </div>
+            <footer id="footer">
+                <div id="slider" class="swipe">
+                    <ul>
+                        <li style='display:block'><div><img src="./alternate/screenshot1.png" /></div></li>
+                        <li style='display:none'><div><img src="./alternate/screenshot2.png" /></div></li>
+                        <li style='display:none'><div><img src="./alternate/screenshot3.png" /></div></li>
+                        <li style='display:none'><div><img src="./alternate/screenshot4.png" /></div></li>
+                        <li style='display:none'><div><img src="./alternate/screenshot5.png" /></div></li>
+                        <li style='display:none'><div><img src="./alternate/screenshot6.png" /></div></li>
+                        <li style='display:none'><div><img src="./alternate/screenshot7.png" /></div></li>
+                        <li style='display:none'><div><img src="./alternate/screenshot8.png" /></div></li>
+                    </ul>
+                </div>
+                <nav>
+                    <span id='prev'><em>prev</em></span>
+                    <span id='position'><em class='on'>&bull;</em><em>&bull;</em><em>&bull;</em><em>&bull;</em><em>&bull;</em><em>&bull;</em><em>&bull;</em><em>&bull;</em></span>
+                    <span id='next'><em>next</em></span>
+                </nav>
+            </footer>
+        </div>
+        <script src="./js/index/swipe.min.js" type="text/javascript"></script>
+        <script src="./js/index/script.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            //analytics
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-868601-7']);
+            _gaq.push(['_trackPageview']);
+
+            (function() {
+              var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+              var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
+    </body>
+</html>

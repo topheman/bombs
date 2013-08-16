@@ -1,0 +1,35 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <title>Topheman Bombs</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta name="apple-touch-fullscreen" content="yes" />
+        <meta name=viewport content="width=device-width,user-scalable=no" />
+        <script>
+            //in debug mode, add remote-tilt if we're not on device with an accelerometer
+            (function(){
+                if( (!window.DeviceMotionEvent && !window.DeviceOrientationEvent) || (!("ontouchstart" in window) && !window.DeviceMotionEvent) || (!("ontouchstart" in window) && !window.DeviceOrientationEvent) ){
+                    var script = document.createElement( 'script' );
+                    script.type = 'text/javascript';
+                    script.src = './js/vendor/device-motion-polyfill.js';
+                    document.head.appendChild(script);
+                }
+            })();
+        </script>
+        <link rel="stylesheet" type="text/css" href="./css/game.css" />
+    </head>
+    <body>
+        <div id="orientationlock">Please lock your device in portrait mode to use this game.</div>
+        <canvas width="400" height="600" id="myCanvas"></canvas>
+        <script src="./js/vendor/require.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            require(['./js/require.config'], function(config) {
+                require(['game/bootstrap'], function(bootstrap) {
+                    bootstrap.init(true);
+                });
+            });
+        </script>
+    </body>
+</html>
