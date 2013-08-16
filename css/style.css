@@ -1,0 +1,192 @@
+body{
+    background-color: #EFEFEF;
+    font-family: Verdana,Geneva,Arial,Helvetica,sans-serif;
+    font-size: 80%;
+    line-height: 1.5em;
+    overflow-y: scroll;
+}
+a, strong,h1,h2{
+    color:#900000;
+}
+h1,h2{
+    font-family: "Comic Sans MS", Tahoma, Arial, Sans-Serif;
+    font-weight: normal;
+}
+#header h1{
+    background-repeat: no-repeat;
+    background-position: center;
+    display: block;
+    text-align: center;
+}
+.game-link-wrapper{
+    margin-right:45px;
+}
+a.game-link{
+    width:100%;
+    padding-top:8px;
+    padding-left:45px;
+    padding-right:0px;
+    padding-bottom:8px;
+    display: block;
+    background-repeat: no-repeat;
+    background-position: 10px 50%;
+    text-align: center;
+    background-color: white;
+    border: 1px solid #900000;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1.2em;
+    height: 32px;
+    min-height: 35px;
+    vertical-align: middle;
+    margin: 0px auto 7px;
+    display: block;
+}
+a.game-link:hover{
+    background-color: #900000;
+    color:white;
+}
+a.game-link small{
+    text-transform: none;
+    font-weight: normal;
+}
+a.game-link.browser{
+    background-image: url(img/logo_safari_32.png);
+}
+a.game-link.android{
+    background-image: url(img/logo_android_32.png);
+}
+a.game-link.github{
+    background-image: url(img/logo_github_32.png);
+}
+a.game-link.blog{
+    background-image: url(img/logo_topheman_32.png);
+}
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen
+and (max-width : 539px){
+    #header h1{
+        background-image: url(../game/img/topheman-bombs-bandeau-min.png);
+        text-indent: -9999px;
+        height: 74px;
+        background-size: 320 74;
+    }
+	#tweet-this-link{
+		position:absolute;
+		top:55px;
+		left:20px;
+	}
+    ul.no-indent{
+        padding-left:0px;
+    }
+    ul.no-indent li{
+        padding-left:0px;
+    }
+    ul.no-indent li:before{
+        content: '- ';
+    }
+}
+/* Desktops and laptops ----------- */
+@media only screen
+and (min-width : 540px) {
+    #header h1{
+        background-image: url(../game/img/topheman-bombs-bandeau.png);
+        text-indent: -9999px;
+        height: 125px;
+    }
+	#tweet-this-link{
+		position:absolute;
+		top:100px;
+		left:30px;
+	}
+}
+/** swipe */
+.swipe {
+  padding-bottom:20px;
+}
+.swipe li div, .swipe div div div {
+  margin:0 10px;
+  padding:0px 10px;
+  font-weight:bold;
+  color:#fff;
+  font-size:20px;
+  text-align:center;
+}
+.swipe li div img{
+    max-width: 100%;
+}
+footer ul{
+    padding:0px;
+}
+footer nav {
+    border-top:1px #3A4146 solid;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#900000), to(#C00000));
+    background-image: -webkit-linear-gradient(top, #900000, #C00000);
+    background-image:    -moz-linear-gradient(top, #900000, #C00000);
+    background-image:     -ms-linear-gradient(top, #900000, #C00000);
+    background-image:      -o-linear-gradient(top, #900000, #C00000);
+    background-image:         linear-gradient(top, #900000, #C00000);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#900000', EndColorStr='#C00000'); 
+    height:35px;
+    position:relative;
+}
+#position {
+    text-align:center;
+    font-size:27px;
+    line-height:1.3;
+    color:#697279;
+    display:block;
+    position:absolute;
+    top:0;
+    left:50%;
+    margin-left:-75px;
+    width:150px;
+}
+#position em {
+    display:inline-block;
+    padding:0 3px;
+    font-style:normal;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.35);
+    font-family:sans-serif;
+}
+#position em.on {
+    color:#fff;
+}
+#prev {
+    border-right:1px white solid;
+    display:inline-block;
+    text-decoration:none;
+}
+#prev em {
+    display:block;
+    border-right:1px #30373C solid;
+    padding:10px 13px 8px;
+    font-style:normal;
+    font-weight:bold;
+    font-size:11px;
+    text-transform:uppercase;
+    color: white;
+    letter-spacing:1px;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.35);
+}
+#next {
+    border-left:1px white solid;
+    display:inline-block;
+    text-decoration:none;
+    position:absolute;
+    right:0;
+    top:0;
+}
+#next em {
+    display:block;
+    border-left:1px #30373C solid;
+    padding:10px 13px 8px;
+    font-style:normal;
+    font-weight:bold;
+    font-size:11px;
+    text-transform:uppercase;
+    color:white;
+    letter-spacing:1px;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.35);
+}

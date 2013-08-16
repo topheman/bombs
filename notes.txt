@@ -1,0 +1,100 @@
+ - Jeu mobile / cross platform
+- iOs / Android
+- idée : lecture de doc W3C sur gestion accelerometre
+- développement d'une classe gérant l'affichage et la physique
+	- finalement développement de cette classe pour la rendre open-source et ne pas rester liée à mon jeu
+- une fois le jeu fini :
+	- paramétrer les algo de difficulté
+	- paramétrer les écrans annexes (instructions, accueils, infos)
+- opportunité pour tester :
+	- la gestion de l'acceleromètre
+	- développer en paralèle un outil pour des développeur en open source avec les divers contraintes que ça entraine : code clair/propre, en anglais, documentation, exemples, démos, répo github ...
+	- développer une solution cross platform (site web/application) avec le même code, tout en utilisant des fonctionalités natives des devices à travers phonegap
+-----------------
+Topheman Bombs HTML5/Javascript Android Game
+
+[Bandeau-lien Topheman Bombs]
+
+Après Topheman Squares, j'ai décidé de continuer ma lancée sur les jeux en HTML5/Javascript. Je vous présente donc aujourd'hui ma dernière création : Topheman Bombs. Le jeu est simple :
+- Vous dirigez la balle bleue à l'aide de l'acceléromètre de votre téléphone/tablette
+- Vous devez exterminer les ennemis (points rouge) en lachant des bombes (toucher l'écran pour lacher une bombe)
+- Attrapez les points verts pour réccupérer des bombes
+
+Matériel requis :
+
+Le jeu marche sur iPhone/iPad dans votre navigateur (je n'ai pas fait d'appli parce que je n'ai pas de mac ni 100$ par an à mettre dans une license développeur Apple).
+Pour les appareils Android, il vous suffit de télécharger l'application sur l'Android Market.
+
+Technos :
+
+Aussi bien pour iOs qu'Android, le code est le même (HTML5/Javascript), c'est la force des solutions telles que phonegap (cela vous permet de créer des applications mobiles natives pour de multiples plateformes en utilisant des technologies web).
+
+La petite histoire :
+
+C'est en lisant la doc du http://www.html5rocks.com/en/tutorials/device/orientation/ sur l'accès à l'accéléromètre depuis javascript que l'idée m'ai venue de faire un jeu tirant partie de cette feature. A l'inverse de Topheman Squares où je savais exactement quel gameplay je recherchais, sur Topheman Bombs, je me suis d'abord préoccupé des technos que je souhaitais utiliser (acceleromètre, canvas, jeu adaptable à tout écran) pour créer ensuite le gameplay au fur et à mesure (je remercie au passage mon collègues Nicolas qui m'a donné quelques idées à ce propos).
+
+Ball.js
+
+J'ai commencé Topheman Bombs pour tester l'accéléromètre sur javascript mais je l'ai surtout fini pour présenter un projet qui utilisait Ball.js, la classe Javascript que j'ai développée pour gérer les effets visuels ainsi que les interractions entre les balles.
+Vous pouvez maintenant trouver le code source de Ball.js sur github.com, j'ai fait attention à bien le documenter ainsi qu'à créer une liste des fonctions à utiliser et des démos.
+Je ferai probablement un article un peu plus technique pour parler de Ball.js et des retours sur l'intégration de mon code HTML5/Javascript dans une application android.
+
+J'espère que vous apprécierez Topheman Bombs (n'hésitez pas à essayer Topheman Squares si vous ne l'avez pas déjà fait),
+
+Tophe
+
+Liens :
+
+Topheman Bombs
+
+
+-----------------
+Introduction
+
+Topheman Bombs is a free HTML5 / Javascript game that takes advantage of the canvas element and the accelerometer on your device. 
+- Tilt your device to manage the blue dot
+- Tap the screen to drop bombs on the enemies (red dots)
+- Grab the green dots to get more bombs
+
+Play on iPod/iPhone/iPad/macbook (directly on the browser)
+
+Download the Android App from the market
+
+Informations
+
+Topheman Bombs has been written so that it could be played on any platform with the same source code.
+- iOs (iPod/iPhone/iPad) : Browser mode playing (I didn't made an app because I don't have a mac computer nor 100$/year to put in the Apple developper license)
+- Android : I made a webApp with phonegap, available on the android market (also, the accelerometer not being accessible through Javascript in Android browser, you can't play it directly in the browser)
+- Desktop computers : Some laptops such as the macbook have accelerometers, so you can play Topheman Bombs on your laptop, tilting it. If it hasn't any accelerometer, you'll be suggested to run with remote tilt (accelerometer emulator).
+
+Developpement
+
+At the beginning of the project, I developped a class Ball.js that supports all the physics (ball collisions, movements ...) and display effects (color, alpha, glow, blink, explode ...) I needed for my game which was at the time still a work in progress.
+Now that I finished Topheman Bombs, I can release Ball.js to the open-source, it could be usefull to developpers who would like to make animations or games such as pool billard, air hockey ...
+
+Ball.js - github repository
+
+Links
+
+More on my blog post (french)
+
+Screenshots
+-----------------
+Ball.js :
+Moteur physique de gestion de balles dans un plan horizontal, avec un moteur de rendu intégré pouvant gérer aussi bien canvas que html. De nombreux effets sont intégrés tels que :
+- Rebonds entre balles
+- Rebonds sur des bordures
+- Clignotement / Transition de couleur
+- Alpha
+- Explosions
+- ...
+Essayez le jeu bombs.topheman.com que j'ai développé pour voir la classe en action, sinon, voici les démos.
+Ball.js pourrait très bien servir pour des animations ou des jeux tels que des billards, des air hockeys ...
+-----------------
+
+Ball.js is a javascript class that handles physics interactions between balls and borders (i.e. collisions) as well rendering. You can render in canvas mode as well as in html mode.
+You have a bunch of display effects such as glowing, blinking, exploding (changing the radius, color, alpha) ...
+
+I made an HTML5/Javascript game based on this class. See for yourself : http://bombs.topheman.com
+
+You can also watch the demo I made explicitly for Ball.js so you could understand the code.

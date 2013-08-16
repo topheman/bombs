@@ -1,0 +1,61 @@
+body {
+    font-family: Arial,sans-serif;
+    margin:0px;
+    padding:0px;
+    background:red;
+}
+#content{
+}
+
+#orientationlock {
+    font-style: italic;
+    font-weight: bold;
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: #333;
+    color: #fff;
+    font-size: 1.2em;
+    padding: 1em;
+    padding-top: 1em;
+    display: none;
+    text-align: center;
+    background-image: url(orientation-lock.png);
+    background-repeat: no-repeat;
+    background-position: 50% 80%;
+}
+canvas{
+    background: white;
+}
+#debug-infos{
+    position: absolute;
+    padding:0px;
+    display:none;
+    width:200px;
+    height: 200px;
+    font-size:0.7em;
+}
+#viewporter.portrait #debug-infos{
+    top:30px;
+    left:0px;
+}
+#viewporter.landscape #debug-infos{
+    -webkit-transform: rotate(90deg);
+    top:0px;
+    left:0px;
+}
+#debug-infos ul{
+    margin:0px;
+    padding:0px;
+}
+#debug-infos ul li{
+    margin:0px;
+    padding:0px;
+    list-style: none;
+}
+canvas{
+    background: white;
+}
