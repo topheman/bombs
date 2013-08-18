@@ -70,7 +70,7 @@ Same as grunt server, but it will launch the server with `release/` directory as
   * set the correct host, port and dest for your ftp server
   * it's in .gitignore by default
   * create `.ftppass` and put the correct credentials (see [grunt-ftp-deploy](https://npmjs.org/package/grunt-ftp-deploy)):
-```javascript
+```
 {
   "key1": {
     "username": "username1",
