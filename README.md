@@ -2,7 +2,10 @@ TOPHEMAN BOMBS v2
 =================
 
 * Try it at : [http://bombs.topheman.com/](http://bombs.topheman.com/)
+* [Video demo on youtube](http://youtu.be/PEw9Kkko4xU "Video demo on youtube")
 * A game made with Ball.js : [https://github.com/topheman/Ball.js](https://github.com/topheman/Ball.js)
+* [Changelog](https://github.com/topheman/bombs/blob/master/CHANGELOG.md)
+* [Workflow with grunt](https://github.com/topheman/bombs/blob/master/GRUNTWORKFLOW.md)
 
 #Introduction
 

@@ -216,3 +216,33 @@ footer nav {
     #forkongithub{position:absolute;display:block;top:0;right:0;width:160px;overflow:hidden;height:150px;}
     #forkongithub a{width:150px;position:absolute;top:35px;right:-62px;transform:rotate(45deg);-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg);box-shadow:4px 4px 10px rgba(0,0,0,0.8);white-space:nowrap;}
 }
+
+/** responsive youtube video */
+@media only screen
+and (max-width : 680px){
+    .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            padding-top: 30px;
+            height: 0;
+            overflow: hidden;
+    }
+
+    .video-container iframe,  
+    .video-container object,  
+    .video-container embed {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+    }
+}
+@media only screen
+and (min-width : 681px) {
+    .video-container {
+        width : 680px;
+        height : 360px;
+        margin : 0px auto;
+    }
+}

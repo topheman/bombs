@@ -69,15 +69,7 @@ Same as grunt server, but it will launch the server with `release/` directory as
   * rename `grunt.options.default.json` to `grunt.options.json`
   * set the correct host, port and dest for your ftp server
   * it's in .gitignore by default
-  * create `.ftppass` and put the correct credentials (see [grunt-ftp-deploy](https://npmjs.org/package/grunt-ftp-deploy)):
-```javascript
-{
-  "key1": {
-    "username": "username1",
-    "password": "password1"
-  }
-}
-```
+  * create `.ftppass` and put the correct credentials (see [grunt-ftp-deploy](https://npmjs.org/package/grunt-ftp-deploy)): `{"key1": {"username": "username1","password": "password1"}}`
   * it's in .gitignore by default
 * Use
   * after you made a build with `grunt build`, just type `grunt deploy`, it will upload your release folder by ftp at the destination you set.
