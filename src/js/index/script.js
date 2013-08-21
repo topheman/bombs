@@ -10,7 +10,7 @@
  * @dependency swipe.js - Brad Birdsall, Prime Copyright 2011, Licensed GPL & MIT
  */
 function activateGameLink(){
-   if( (!window.DeviceMotionEvent && !window.DeviceOrientationEvent) || (!("ontouchstart" in window) && !window.DeviceMotionEvent) || (!("ontouchstart" in window) && !window.DeviceOrientationEvent) ){
+   if( (!window.DeviceMotionEvent && !window.DeviceOrientationEvent) || (!("ontouchstart" in window) && !window.DeviceMotionEvent) || (!("ontouchstart" in window) && !window.DeviceOrientationEvent) || (navigator.userAgent.toLowerCase().indexOf('firefox') > -1 && !("ontouchstart" in window)) ){
         document.getElementById("go-play").addEventListener("click",function(e){
             e.preventDefault();
             console.log(this);
