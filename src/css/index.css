@@ -246,3 +246,12 @@ and (min-width : 681px) {
         margin : 0px auto;
     }
 }
+/** copyright */
+.copyright{
+    text-align: center;
+    font-size: 10px;
+    color:#62686A;
+}
+.copyright a{
+    color:#62686A;
+}
