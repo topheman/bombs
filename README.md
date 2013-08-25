@@ -58,8 +58,7 @@ Feel free to take a look.
 
 #Related
 
-* [Blog post (v1)](http://blog.topheman.com/2012/04/01/topheman-bombs-html5-javascript-android-game/)
-* Blog post v2 (comming)
+* [Blog post](http://blog.topheman.com/2013/08/24/topheman-bombs-v2-refonte-full-html5-javascript/)
 * Thanks to [remote-tilt.com](http://remote-tilt.com/)
 
 #License
