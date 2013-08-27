@@ -14,13 +14,13 @@ I don't pretend this is the best solution. Since I thought it could be usefull t
 
 ##File organization
 
-* `src/` : folder containing your sources and where you code
+* [`src/`](https://github.com/topheman/bombs/tree/master/src) : folder containing your sources and where you code
 * `release/` : folder created at build time containing the build version of `src/` (in .gitignore by default)
-* `Gruntfile.js` : the file containing the grunt task, you may have to modify it according to your needs
-* `grunt.options.default.json` : see `grunt deploy`
+* [`Gruntfile.js`](https://github.com/topheman/bombs/blob/master/Gruntfile.js) : the file containing the grunt task, you may have to modify it according to your needs
+* [`grunt.options.default.json`](https://github.com/topheman/bombs/blob/master/grunt.options.default.json) : see `grunt deploy`
 * `.ftppass` : see `grunt deploy`
-* `htaccessToTransfer` : see `grunt deploy`
-* `requirejs.compile.options.js` : see `grunt build`
+* [`htaccessToTransfer`](https://github.com/topheman/bombs/blob/master/htaccessToTransfer) : see `grunt deploy`
+* [`requirejs.compile.options.js`](https://github.com/topheman/bombs/blob/master/requirejs.compile.options.js) : see `grunt build`
 
 ##Grunt commands
 
@@ -46,12 +46,12 @@ Now that you've made the installation, you'll have access to different command l
     * game.release.html becomes game.html (it has a link to the manifest and a direct call to the build via requireJS)
   * creates an html5 cache manifest file in `release/manifest.appcache` - see the manifest task in the `Gruntfile` to match with your needs
 * requireJS configuration
-  * `src/js/require.config.js` : this is the configuration where you set baseUrl, paths, shim, etc … It is used client side in debug mode
+  * [`src/js/require.config.js`](https://github.com/topheman/bombs/blob/master/src/js/require.config.js) : this is the configuration where you set baseUrl, paths, shim, etc … It is used client side in debug mode
   * `requirejs.compile.options.js` : this file is called at build time, it has a reference to the previous file (so that you declare your requireJS config only once) :
     * you can specify which module you want to build (you can make multiple builds like a game would need a runtime.js and levelEditor.js)
   * see how different require is called in :
-    * `src/game.html`
-    * `src/game.release.html`
+    * [`src/game.html`](https://github.com/topheman/bombs/blob/master/src/game.html)
+    * [`src/game.release.html`](https://github.com/topheman/bombs/blob/master/src/game.release.html)
 
 ###grunt server
 
