@@ -10,14 +10,17 @@
  * @dependency swipe.js - Brad Birdsall, Prime Copyright 2011, Licensed GPL & MIT
  */
 function activateGameLink(){
-   if( (!window.DeviceMotionEvent && !window.DeviceOrientationEvent) || (!("ontouchstart" in window) && !window.DeviceMotionEvent) || (!("ontouchstart" in window) && !window.DeviceOrientationEvent) || (navigator.userAgent.toLowerCase().indexOf('firefox') > -1 && !("ontouchstart" in window)) ){
+    var success = function(){};
+    var failure = function(){
         document.getElementById("go-play").addEventListener("click",function(e){
             e.preventDefault();
-            console.log(this);
             if(confirm("Your browser doesn't support the accelerometer, if you are on desktop, you still can try with the device motion emulator.\n\nMake sure to allow the popup to be able to control the device motion emulator\n\nDo you still want to continue ?")){
                 window.location = this.href+"?emulate";
             }
         });
+    };
+    if( (!("ontouchstart" in window)) ){
+        sensorsChecker.checkDeviceorientation(success,failure,{userAgentCheck: /(iPad|iPhone|Nexus|Mobile|Tablet)/i});
     }
 }
 

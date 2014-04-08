@@ -15,7 +15,7 @@
         <!-- downloading the build (with requirejs included), then require the main module and lauchn it via a require -->
         <script src="./js/game/bootstrap.js"></script>
         <script type="text/javascript">
-            if( ( (!window.DeviceMotionEvent && !window.DeviceOrientationEvent) || (!("ontouchstart" in window) && !window.DeviceMotionEvent) || (!("ontouchstart" in window) && !window.DeviceOrientationEvent) || (navigator.userAgent.toLowerCase().indexOf('firefox') > -1 && !("ontouchstart" in window)) ) && window.location.search === "?emulate" ){
+            if(location.search === "?emulate"){
                 require(['js/vendor/device-motion-polyfill','game/bootstrap'], function(undefined,bootstrap) {
                     bootstrap.init();
                 });
