@@ -1439,6 +1439,11 @@ ms@2.1.1:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.1.tgz#30a5864eb3ebb0a66f2ebe6d727af06a09d86e0a"
   integrity sha512-tgp+dl5cGk28utYktBsrFqA7HKgrhgPsg6Z/EfhWI4gl1Hwq8B/GmY/0oXZ6nF8hDVesS/FpnYaD/kOWhYQvyg==
 
+my-local-ip@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/my-local-ip/-/my-local-ip-1.0.0.tgz#37585555a4ff1985309edac7c2a045a466be6c32"
+  integrity sha1-N1hVVaT/GYUwntrHwqBFpGa+bDI=
+
 nanomatch@^1.2.9:
   version "1.2.13"
   resolved "https://registry.yarnpkg.com/nanomatch/-/nanomatch-1.2.13.tgz#b87a8aa4fc0de8fe6be88895b38983ff265bd119"

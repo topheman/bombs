@@ -6,7 +6,7 @@ module.exports = function(grunt) {
     var builderOptions = require('./requirejs.compile.options'),
         version = require('./package.json').version,
         gruntSpecificOptions;
-    
+
     try{
         gruntSpecificOptions = grunt.file.readJSON('./grunt.options.json');//specific options meant to be split from the hard code of the GruntFile.js
     }
@@ -14,9 +14,9 @@ module.exports = function(grunt) {
         grunt.log.error("No grunt.options.json file find (you will need it for ftp-deploy)");
     }
 
-    // Configure Grunt 
+    // Configure Grunt
     grunt.initConfig({
-        
+
         clean: {
             //clean all before any build
             all: {
@@ -41,7 +41,7 @@ module.exports = function(grunt) {
                 ]
             }
         },
-        
+
         //to include require.js in the build we run a concat task (before the after-build clean)
         //you could also use it if you have multiple css to concat them into one file
         concat: {
@@ -50,16 +50,16 @@ module.exports = function(grunt) {
                 dest: 'release/js/game/bootstrap.js'
             }
         },
-        
+
         //for mime-type on apache servers, we add the .htaccess with the declaration : AddType text/cache-manifest .appcache
-        copy: {            
+        copy: {
             dist: {
                 files: [
                     { 'release/.htaccess' : 'htaccessToTransfer' }
                 ]
             }
         },
-        
+
         // grunt-contrib-connect will serve the files of the project
         // on specified port and hostname
         connect: {
@@ -80,7 +80,7 @@ module.exports = function(grunt) {
                 }
             }
         },
-        
+
         // grunt-open will open your browser at the project's URL
         open: {
             release: {
@@ -90,13 +90,13 @@ module.exports = function(grunt) {
                 path: 'http://localhost:<%= connect.debug.options.port%>/index.html'
             }
         },
-        
+
         requirejs: {
             compile: {
                 options: builderOptions
             }
         },
-        
+
         cssmin: {
             compile: {
                 files: {
@@ -105,7 +105,7 @@ module.exports = function(grunt) {
                 }
             }
         },
-        
+
         //copy into release folder the release.html files + adds buildNumber in title tag via templating, at the end of the build
         processhtml: {
             options: {
@@ -123,7 +123,7 @@ module.exports = function(grunt) {
                 }
             }
         },
-        
+
         manifest: {
             generate: {
                 options: {
@@ -159,7 +159,7 @@ module.exports = function(grunt) {
         }
 
     });
-    
+
     if(gruntSpecificOptions){
         grunt.config("ftp-deploy",{
             release: {
@@ -176,10 +176,19 @@ module.exports = function(grunt) {
         grunt.registerTask('deploy', ['ftp-deploy:release']);
     }
 
-    grunt.registerTask('server', ['open:debug', 'connect:debug']);
-    grunt.registerTask('server-debug', ['open:debug', 'connect:debug']);
-    grunt.registerTask('server-release', ['open:release', 'connect:release']);
-    
+    function makeLocalIpLog(mode) {
+        return function() {
+            grunt.log.writeln('Access from your local network: http://' + require('my-local-ip')() + ':' + grunt.config().connect[mode].options.port);
+        }
+    }
+
+    grunt.registerTask('my-local-ip:release', makeLocalIpLog('release'));
+    grunt.registerTask('my-local-ip:debug', makeLocalIpLog('debug'));
+
+    grunt.registerTask('server', ['open:debug', 'my-local-ip:debug', 'connect:debug']);
+    grunt.registerTask('server-debug', ['open:debug', 'my-local-ip:debug', 'connect:debug']);
+    grunt.registerTask('server-release', ['open:release', 'my-local-ip:release', 'connect:release']);
+
     grunt.registerTask('build', ['clean:all', 'requirejs', 'cssmin', 'concat', 'clean:after-build', 'copy', 'processhtml','manifest']);
-    
+
 };
