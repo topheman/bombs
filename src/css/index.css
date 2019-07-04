@@ -59,9 +59,9 @@ a.game-link.technos{
     padding-left:45px;
     padding-right:45px;
     padding-bottom:5px;
-    background:url(img/logo_safari_32.png) no-repeat 1% 5%, 
-        url(img/logo_firefox_32.png) no-repeat 99% 5%, 
-        url(img/logo_chrome_32.png) no-repeat 50% 5%, 
+    background:url(img/logo_safari_32.png) no-repeat 1% 5%,
+        url(img/logo_firefox_32.png) no-repeat 99% 5%,
+        url(img/logo_chrome_32.png) no-repeat 50% 5%,
         url(img/logo_apple_32.png) no-repeat 1% 95%,
         url(img/logo_android_32.png) no-repeat 99% 95%;
     background-color: white;
@@ -109,11 +109,12 @@ and (min-width : 540px) {
         top:100px;
         left:30px;
     }
-    #qr-code{
+    #qrcode{
         display: block;
+        padding: 5px;
         width: 155px;
         height: 155px;
-        background-image: url(../alternate/bombs-topheman-com-qrcode.png);
+        background: white;
         float:right;
     }
 }
@@ -143,7 +144,7 @@ footer nav {
     background-image:     -ms-linear-gradient(top, #900000, #C00000);
     background-image:      -o-linear-gradient(top, #900000, #C00000);
     background-image:         linear-gradient(top, #900000, #C00000);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#900000', EndColorStr='#C00000'); 
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#900000', EndColorStr='#C00000');
     height:35px;
     position:relative;
 }
@@ -228,8 +229,8 @@ and (max-width : 680px){
             overflow: hidden;
     }
 
-    .video-container iframe,  
-    .video-container object,  
+    .video-container iframe,
+    .video-container object,
     .video-container embed {
             position: absolute;
             top: 0;

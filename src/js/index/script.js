@@ -6,7 +6,7 @@
  * http://blog.topheman.com/
  * http://twitter.com/topheman
  * https://github.com/topheman/bombs
- * 
+ *
  * @dependency swipe.js - Brad Birdsall, Prime Copyright 2011, Licensed GPL & MIT
  */
 function activateGameLink(){
@@ -43,5 +43,14 @@ function activateSwipe(){
     }
 }
 
+function makeQRCode(link) {
+    new QRCode(document.getElementById("qrcode"), {
+        text: link,
+        width: 155,
+        height: 155
+    });
+}
+
 activateGameLink();
 activateSwipe();
+makeQRCode(location.href.replace(/\/$/,"") + "/game.html");
