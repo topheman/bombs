@@ -10,7 +10,7 @@
 - added accelerometer emulator on desktop (not only for development but for game testing too)
 - patched remotetilt (the emulator) a little so that it could `window.postMessage()` to the game window - you can now drop bombs hitting space as you manage the ball on desktop !
 - changed jQuery for Zepto + not used in the home page
-- removed zynga viewporter 
+- removed zynga viewporter
   - use `window.onresize` to check orientation change (which is more reliable than `window.orientation` which has multiple implementation)
   - use css media queries for orientation lock screen
 - plugged in my grunt workflow which basically ([more here](https://github.com/topheman/bombs/blob/master/GRUNTWORKFLOW.md)) :

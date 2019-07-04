@@ -1,18 +1,18 @@
 TOPHEMAN GRUNT WORKFLOW
 =======================
 
-##Disclaimer
+## Disclaimer
 
 I don't pretend this is the best solution. Since I thought it could be usefull to other people, I wanted to share it.
 
-##Installation
+## Installation
 
 * Prerequisite
   * Install [nodeJS](http://nodejs.org/)
   * Install [grunt](http://gruntjs.com/getting-started) (globally, to have the grunt command line) doing : `npm install -g grunt-cli`
 * At the root of your project, run `npm install` , it will install locally all the node modules needed (all referenced in the package.json file at the root of the project).
 
-##File organization
+## File organization
 
 * [`src/`](https://github.com/topheman/bombs/tree/master/src) : folder containing your sources and where you code
 * `release/` : folder created at build time containing the build version of `src/` (in .gitignore by default)
@@ -22,7 +22,7 @@ I don't pretend this is the best solution. Since I thought it could be usefull t
 * [`htaccessToTransfer`](https://github.com/topheman/bombs/blob/master/htaccessToTransfer) : see `grunt deploy`
 * [`requirejs.compile.options.js`](https://github.com/topheman/bombs/blob/master/requirejs.compile.options.js) : see `grunt build`
 
-##Grunt commands
+## Grunt commands
 
 Now that you've made the installation, you'll have access to different command lines (those aren't grunt's default command lines, those are tasks I registred in the `Gruntfile.js`, feel free to check how it works and adapt it to your own needs):
 
@@ -31,7 +31,7 @@ Now that you've made the installation, you'll have access to different command l
 * [`grunt server-release`](#grunt-server-release)
 * [`grunt deploy`](#grunt-deploy)
 
-###grunt build
+### grunt build
 
 * What does it do ?
   * cleans the `release/` folder
@@ -53,17 +53,17 @@ Now that you've made the installation, you'll have access to different command l
     * [`src/game.html`](https://github.com/topheman/bombs/blob/master/src/game.html)
     * [`src/game.release.html`](https://github.com/topheman/bombs/blob/master/src/game.release.html)
 
-###grunt server
+### grunt server
 
 Just run this command, it will start a server with `src/` directory as baseUrl and will open it in your browser at localhost:9002 (see `connect` task).
 
 You don't have to have an Apache server anymore !
 
-###grunt server-release
+### grunt server-release
 
 Same as grunt server, but it will launch the server with `release/` directory as baseUrl.
 
-###grunt deploy
+### grunt deploy
 
 * Prerequisite
   * rename `grunt.options.default.json` to `grunt.options.json`
