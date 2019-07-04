@@ -144,7 +144,7 @@ module.exports = function(grunt) {
                         "https://*"
                     ],
                     fallback: [
-                        "/ offline.html"
+                        "/offline.html"
                     ],
                     preferOnline: false,
                     verbose: true,
