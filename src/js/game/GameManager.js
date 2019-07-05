@@ -17,7 +17,7 @@
  * - ...
  */
 
-define (['game/Stage','vendor/Ball','game/HighScoresManager','jQuery','utils/requestAnimFrame','utils/browserDetect'],function(Stage,undefined,HighScoresManager,undefined,undefined,browserDetect){
+define (['game/Stage','vendor/Ball','game/HighScoresManager','jQuery','utils/browserDetect'],function(Stage,undefined,HighScoresManager,undefined,browserDetect){
     
     var GameManager;
 
@@ -865,7 +865,7 @@ define (['game/Stage','vendor/Ball','game/HighScoresManager','jQuery','utils/req
         };
 
         /**
-         * Create the loop function called in the requestAnimFrame only once to optimize garbage collection
+         * Create the loop function called in the requestAnimationFrame only once to optimize garbage collection
          */
         this.loopCallbackFunction = (function(self){
             return function(){
@@ -878,7 +878,7 @@ define (['game/Stage','vendor/Ball','game/HighScoresManager','jQuery','utils/req
             var self = this;
             var i,j;//array iterators
             if(looping === true)
-                window.requestAnimFrame(this.loopCallbackFunction);
+                window.requestAnimationFrame(this.loopCallbackFunction);
             else
                 return;//if we're not looping, we don't call the next loop AND we don't execute this loop
 
