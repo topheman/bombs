@@ -17,7 +17,7 @@
  * - ...
  */
 
-define (['game/Stage','vendor/Ball','game/HighScoresManager','jQuery','utils/browserDetect'],function(Stage,undefined,HighScoresManager,undefined,browserDetect){
+define (['game/Stage','vendor/Ball','game/HighScoresManager','jQuery','utils/browserDetect', 'utils/sensorsChecker'],function(Stage,undefined,HighScoresManager,undefined,browserDetect,sensorsChecker){
     
     var GameManager;
 
@@ -194,7 +194,8 @@ define (['game/Stage','vendor/Ball','game/HighScoresManager','jQuery','utils/bro
             }
 
             var self = this;
-            Stage.prepareStage(function(stageCanvas){
+            Stage.prepareStage(async function(stageCanvas){
+                let accelerometerOK = false
                 //initialize GameManager canvas var from this closure
                 canvas = stageCanvas;
                 //initialize width/height vars from this closure
@@ -206,15 +207,18 @@ define (['game/Stage','vendor/Ball','game/HighScoresManager','jQuery','utils/bro
                     highScoresManager = new HighScoresManager(HIGH_SCORES_TOP_NUMBER,{localStorageKeyName:HIGH_SCORES_MANAGER_KEY});
                     self.initOrientationCss();
                     self.initSounds();
-                    self.initMotionListeners();
+                    accelerometerOK = await self.initMotionListeners();
 //                    self.initKeyboardListeners();
                     self.initWelcomeScreens('welcome');
                 }
                 else{
                     alert("Sorry, your browser doesn't support canvas.\nTopheman Bombs only works with recent browsers.");
                 }
-                if(html5DeviceMotionSupport === false && html5DeviceOrientationSupport === false){
-                    alert("*Your browser/device doesn't have accelerometer support.\nIf you have an Android device, try Firefox browser.");
+                if (accelerometerOK) {
+                    alert("Accelerometer detected - OK");
+                }
+                else {
+                    alert("No Accelerometer detecter -KO");
                 }
             });
             this.appLaunched = true;
@@ -291,43 +295,45 @@ define (['game/Stage','vendor/Ball','game/HighScoresManager','jQuery','utils/bro
 
         this.initMotionListeners = function(){
 
-            if(!window.DeviceMotionEvent || browserDetect.isAndroidTablet() || browserDetect.isAndroidMobile()){
-                html5DeviceMotionSupport = false;
-                if(window.DeviceOrientationEvent){
-                    html5DeviceOrientationSupport = true;
-                    var deviceOrientationCallback;
-                    //not a mobile or a firefox tablet (a chrome tablet)
-                    if(window.orientation === 0){
-//                        alert('debug infos : Android device or window.DeviceMotionEvent missing\n\nwindow.orientation : '+window.orientation);
-                        deviceOrientationCallback = function(e){
-                            inputX = e.gamma/20;
-                            inputY = e.beta/20;
-                        };
+            return new Promise((res, rej) => {
+                sensorsChecker.checkDeviceorientation(function() {
+                    if(window.DeviceOrientationEvent){
+                        html5DeviceOrientationSupport = true;
+                        var deviceOrientationCallback;
+                        // not a mobile or a firefox tablet (a chrome tablet)
+                        if(window.orientation === 0){
+                        // alert('debug infos : Android device or window.DeviceMotionEvent missing\n\nwindow.orientation : '+window.orientation);
+                            deviceOrientationCallback = function(e){
+                                inputX = e.gamma/20;
+                                inputY = e.beta/20;
+                            };
+                        }
+                        // not a firefox tablet (a mobile)
+                        else{
+                        // alert('debug infos : Android device or window.DeviceMotionEvent missing\n\nwindow.orientation : '+window.orientation);
+                            deviceOrientationCallback = function(e){
+                                inputX = e.beta/20;
+                                inputY = -e.gamma/20;
+                            };
+                        }
+                        window.addEventListener('deviceorientation',deviceOrientationCallback,false);
+                        return res(true);
                     }
-                    //not a firefox tablet (a mobile)
-                    else{
-//                        alert('debug infos : Android device or window.DeviceMotionEvent missing\n\nwindow.orientation : '+window.orientation);
-                        deviceOrientationCallback = function(e){
-                            inputX = e.beta/20;
-                            inputY = -e.gamma/20;
-                        };
+                    else if (window.DeviceMotionEvent) {
+                        html5DeviceMotionSupport = true;
+                        //mac or desktop with emulator
+                        // alert('debug infos : iOS or desktop emulator');
+                        window.addEventListener('devicemotion', function(e){
+                            inputX = e.accelerationIncludingGravity.x*DEVICEMOTION_INPUT_RATIO;
+                            inputY = -e.accelerationIncludingGravity.y*DEVICEMOTION_INPUT_RATIO;
+                        },false);
+                        return res(true);
                     }
-                    window.addEventListener('deviceorientation',deviceOrientationCallback,false);
-                }
-                else{
-                    html5DeviceOrientationSupport = false;
-                }
-            }
-            else{
-                html5DeviceMotionSupport = true;
-                //mac or desktop with emulator
-//                alert('debug infos : iOS or desktop emulator');
-                window.addEventListener('devicemotion', function(e){
-                    inputX = e.accelerationIncludingGravity.x*DEVICEMOTION_INPUT_RATIO;
-                    inputY = -e.accelerationIncludingGravity.y*DEVICEMOTION_INPUT_RATIO;
-                },false);
-                html5DeviceOrientationSupport = false;
-            }
+                    return res(false)
+                }, function() {
+                    return res(false)
+                })
+            });
         };
         
 //        this.initKeyboardListeners = function(){
