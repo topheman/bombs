@@ -11,22 +11,28 @@
  */
 
 const dialog = makeDialog();
-
-dialog.openModal('<p><strong>Hello</strong></p><p><button onclick="dialog.close()">Close</button></p>');
+let isDeviceOrientationActivated = false;
+const isMobileDevice = /(iPad|iPhone|Nexus|Mobile|Tablet)/i.test(navigator.userAgent);
+const linkToGame = location.href.replace(/\/$/,"") + "/game.html";
 
 function activateGameLink(){
-    var success = function(){};
-    var failure = function(){
+    sensorsChecker.checkDeviceorientation(function(){
+        isDeviceOrientationActivated = true;
+    }, function() {
         document.getElementById("go-play").addEventListener("click",function(e){
             e.preventDefault();
-            if(confirm("Your browser doesn't support the accelerometer, if you are on desktop, you still can try with the device motion emulator.\n\nMake sure to allow the popup to be able to control the device motion emulator\n\nDo you still want to continue ?")){
-                window.location = this.href+"?emulate";
+            const infos = ['<strong>No accelerometer</strong> was detected on your device.'];
+            if (isMobileDevice) {
+                infos.push(`Please activate <strong>"Motion and Orientation"</strong> feature in\nSettings > Safari or Settings > Chrome`);
             }
+            else {
+                infos.push("You don't seem to be on a mobile device.<br/>If you're a developer, you can test with the sensors in the devtools.");
+                infos.push("Otherwise, snap the QRCode with your mobile to play.");
+                infos.push(`<a href="./game.html" style="text-align:center; display: block;"><img src="${document.querySelector("#qrcode img").src}"/></a>`);
+            }
+            dialog.openModal(`<p>${infos.join('</p><p>')}</p>`)
         });
-    };
-    if( (!("ontouchstart" in window)) ){
-        sensorsChecker.checkDeviceorientation(success,failure,{userAgentCheck: /(iPad|iPhone|Nexus|Mobile|Tablet)/i});
-    }
+    });
 }
 
 function activateSwipe(){
@@ -48,7 +54,7 @@ function activateSwipe(){
     }
 }
 
-function makeQRCode(link) {
+function makeQRCode(link, el = document.getElementById("qrcode")) {
     new QRCode(document.getElementById("qrcode"), {
         text: link,
         width: 155,
@@ -58,4 +64,4 @@ function makeQRCode(link) {
 
 activateGameLink();
 activateSwipe();
-makeQRCode(location.href.replace(/\/$/,"") + "/game.html");
+makeQRCode(linkToGame);
