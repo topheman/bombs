@@ -26,8 +26,7 @@ function activateGameLink(){
                 infos.push(`Please activate <strong>"Motion and Orientation"</strong> feature in\nSettings > Safari or Settings > Chrome`);
             }
             else {
-                infos.push("You don't seem to be on a mobile device.<br/>If you're a developer, you can test with the sensors in the devtools.");
-                infos.push("Otherwise, snap the QRCode with your mobile to play.");
+                infos.push("You don't seem to be on a mobile device, snap the QRCode with your mobile to play.");
                 infos.push(`<a href="./game.html" style="text-align:center; display: block;"><img src="${document.querySelector("#qrcode img").src}"/></a>`);
             }
             dialog.openModal(`<p>${infos.join('</p><p>')}</p>`)
