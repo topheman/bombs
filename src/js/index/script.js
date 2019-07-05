@@ -9,6 +9,11 @@
  *
  * @dependency swipe.js - Brad Birdsall, Prime Copyright 2011, Licensed GPL & MIT
  */
+
+const dialog = makeDialog();
+
+dialog.openModal('<p><strong>Hello</strong></p><p><button onclick="dialog.close()">Close</button></p>');
+
 function activateGameLink(){
     var success = function(){};
     var failure = function(){
