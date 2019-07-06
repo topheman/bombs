@@ -194,6 +194,7 @@ define (['game/Stage','vendor/Ball','game/HighScoresManager','jQuery','utils/bro
             }
 
             var self = this;
+            self.initDialog();
             Stage.prepareStage(async function(stageCanvas){
                 let accelerometerOK = false
                 //initialize GameManager canvas var from this closure
@@ -214,11 +215,12 @@ define (['game/Stage','vendor/Ball','game/HighScoresManager','jQuery','utils/bro
                 else{
                     alert("Sorry, your browser doesn't support canvas.\nTopheman Bombs only works with recent browsers.");
                 }
-                if (accelerometerOK) {
-                    alert("Accelerometer detected - OK");
-                }
-                else {
-                    alert("No Accelerometer detecter -KO");
+                if (!accelerometerOK) {
+                    self.dialog.openModal(`
+                        <p><strong>No accelerometer</strong> was detected on your device.</p>
+                        <p>Please activate <strong>"Motion and Orientation"</strong> feature in\nSettings > Safari or Settings > Chrome</p>
+                        <p style="text-align:center;"><button onclick="document.querySelector('dialog').close()">OK</button></p>
+                    `);
                 }
             });
             this.appLaunched = true;
@@ -261,6 +263,10 @@ define (['game/Stage','vendor/Ball','game/HighScoresManager','jQuery','utils/bro
         this.resume = function(){
             this.appPaused = false;
         };
+
+        this.initDialog = function() {
+            this.dialog = makeDialog();
+        }
 
         this.initOrientationCss = function(){
             if(browserDetect.isMobileDevice()){

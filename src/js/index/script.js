@@ -29,6 +29,7 @@ function activateGameLink(){
                 infos.push("You don't seem to be on a mobile device, snap the QRCode with your mobile to play.");
                 infos.push(`<a href="./game.html" style="text-align:center; display: block;"><img src="${document.querySelector("#qrcode img").src}"/></a>`);
             }
+            infos.push(`<button onclick="document.querySelector('dialog').close()">OK</button>`);
             dialog.openModal(`<p>${infos.join('</p><p>')}</p>`)
         });
     });

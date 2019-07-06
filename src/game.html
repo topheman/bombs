@@ -18,11 +18,14 @@
                 }
             })();
         </script>
+        <link rel="stylesheet" type="text/css" href="./js/vendor/dialog-polyfill.css" />
         <link rel="stylesheet" type="text/css" href="./css/game.css" />
     </head>
     <body>
         <div id="orientationlock">Please lock your device in portrait mode to use this game.</div>
         <canvas width="400" height="600" id="myCanvas"></canvas>
+        <script src="./js/vendor/dialog-polyfill.js" type="text/javascript"></script>
+        <script src="./js/utils/dialog.js" type="text/javascript"></script>
         <script src="./js/vendor/require.js" type="text/javascript"></script>
         <script type="text/javascript">
             require(['./js/require.config'], function(config) {
