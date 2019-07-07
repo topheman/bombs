@@ -303,43 +303,44 @@ define (['game/Stage','vendor/Ball','game/HighScoresManager','jQuery','utils/bro
 
             return new Promise((res, rej) => {
                 sensorsChecker.checkDeviceorientation(function() {
-                    if(window.DeviceOrientationEvent){
-                        html5DeviceOrientationSupport = true;
-                        var deviceOrientationCallback;
-                        // not a mobile or a firefox tablet (a chrome tablet)
-                        if(window.orientation === 0){
-                        // alert('debug infos : Android device or window.DeviceMotionEvent missing\n\nwindow.orientation : '+window.orientation);
-                            deviceOrientationCallback = function(e){
-                                inputX = e.gamma/20;
-                                inputY = e.beta/20;
-                            };
-                        }
-                        // not a firefox tablet (a mobile)
-                        else{
-                        // alert('debug infos : Android device or window.DeviceMotionEvent missing\n\nwindow.orientation : '+window.orientation);
-                            deviceOrientationCallback = function(e){
-                                inputX = e.beta/20;
-                                inputY = -e.gamma/20;
-                            };
-                        }
-                        window.addEventListener('deviceorientation',deviceOrientationCallback,false);
-                        return res(true);
-                    }
-                    else if (window.DeviceMotionEvent) {
-                        html5DeviceMotionSupport = true;
-                        //mac or desktop with emulator
-                        // alert('debug infos : iOS or desktop emulator');
-                        window.addEventListener('devicemotion', function(e){
-                            inputX = e.accelerationIncludingGravity.x*DEVICEMOTION_INPUT_RATIO;
-                            inputY = -e.accelerationIncludingGravity.y*DEVICEMOTION_INPUT_RATIO;
-                        },false);
-                        return res(true);
-                    }
-                    return res(false)
+                    return res(true)
                 }, function() {
                     return res(false)
                 })
-            });
+            }).then(accelerometerOK => {
+                if(window.DeviceOrientationEvent){
+                    html5DeviceOrientationSupport = accelerometerOK;
+                    var deviceOrientationCallback;
+                    // not a mobile or a firefox tablet (a chrome tablet)
+                    if(window.orientation === 0){
+                    // alert('debug infos : Android device or window.DeviceMotionEvent missing\n\nwindow.orientation : '+window.orientation);
+                        deviceOrientationCallback = function(e){
+                            inputX = e.gamma/20;
+                            inputY = e.beta/20;
+                        };
+                    }
+                    // not a firefox tablet (a mobile)
+                    else{
+                    // alert('debug infos : Android device or window.DeviceMotionEvent missing\n\nwindow.orientation : '+window.orientation);
+                        deviceOrientationCallback = function(e){
+                            inputX = e.beta/20;
+                            inputY = -e.gamma/20;
+                        };
+                    }
+                    window.addEventListener('deviceorientation',deviceOrientationCallback,false);
+                    return accelerometerOK;
+                }
+                else if (window.DeviceMotionEvent) {
+                    html5DeviceMotionSupport = accelerometerOK;
+                    //mac or desktop with emulator
+                    // alert('debug infos : iOS or desktop emulator');
+                    window.addEventListener('devicemotion', function(e){
+                        inputX = e.accelerationIncludingGravity.x*DEVICEMOTION_INPUT_RATIO;
+                        inputY = -e.accelerationIncludingGravity.y*DEVICEMOTION_INPUT_RATIO;
+                    },false);
+                    return accelerometerOK;
+                }
+            })
         };
         
 //        this.initKeyboardListeners = function(){
@@ -460,13 +461,8 @@ define (['game/Stage','vendor/Ball','game/HighScoresManager','jQuery','utils/bro
                         break;
                     case 'home':
                         if(hasClickedPlayButton({x:e.pageX,y:e.pageY})){
-                            if(html5DeviceMotionSupport || html5DeviceOrientationSupport){
-                                self.initGame();
-                                self.nextLevel();
-                            }
-                            else{
-                                alert("Your browser/device doesn't have accelerometer support.\nIf you have an Android device, try Firefox browser.");
-                            }
+                            self.initGame();
+                            self.nextLevel();
                         }
                         if(hasClickedHighScoresButton({x:e.pageX,y:e.pageY})){
                             self.initWelcomeScreens('highScores');
