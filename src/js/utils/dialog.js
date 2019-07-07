@@ -11,7 +11,7 @@ function makeDialog() {
     var minY = rect.top + e.target.clientTop;
     if ((e.clientX < minX || e.clientX >= minX + e.target.clientWidth) ||
         (e.clientY < minY || e.clientY >= minY + e.target.clientHeight)) {
-      e.target.close();
+      e.target && e.target.close && e.target.close();
     }
   });
   // add .modal method that accepts html
