@@ -7,12 +7,15 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
         <meta name="apple-touch-fullscreen" content="yes" />
         <meta name=viewport content="width=device-width,user-scalable=no" />
+        <link rel="stylesheet" type="text/css" href="./js/vendor/dialog-polyfill.css" />
         <link rel="stylesheet" type="text/css" href="./css/game.css" />
     </head>
     <body>
         <div id="orientationlock">Please lock your device in portrait mode to use this game.</div>
         <canvas width="400" height="600" id="myCanvas"></canvas>
         <!-- downloading the build (with requirejs included), then require the main module and lauchn it via a require -->
+        <script src="./js/vendor/dialog-polyfill.js" type="text/javascript"></script>
+        <script src="./js/utils/dialog.js" type="text/javascript"></script>
         <script src="./js/game/bootstrap.js"></script>
         <script type="text/javascript">
             if(location.search === "?emulate"){
