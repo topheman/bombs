@@ -81,16 +81,6 @@ module.exports = function(grunt) {
             }
         },
 
-        // grunt-open will open your browser at the project's URL
-        open: {
-            release: {
-                path: 'http://localhost:<%= connect.release.options.port%>/index.html'
-            },
-            debug: {
-                path: 'http://localhost:<%= connect.debug.options.port%>/index.html'
-            }
-        },
-
         requirejs: {
             compile: {
                 options: builderOptions
@@ -185,9 +175,9 @@ module.exports = function(grunt) {
     grunt.registerTask('my-local-ip:release', makeLocalIpLog('release'));
     grunt.registerTask('my-local-ip:debug', makeLocalIpLog('debug'));
 
-    grunt.registerTask('server', ['open:debug', 'my-local-ip:debug', 'connect:debug']);
-    grunt.registerTask('server-debug', ['open:debug', 'my-local-ip:debug', 'connect:debug']);
-    grunt.registerTask('server-release', ['open:release', 'my-local-ip:release', 'connect:release']);
+    grunt.registerTask('server', ['my-local-ip:debug', 'connect:debug']);
+    grunt.registerTask('server-debug', ['my-local-ip:debug', 'connect:debug']);
+    grunt.registerTask('server-release', ['my-local-ip:release', 'connect:release']);
 
     grunt.registerTask('build', ['clean:all', 'requirejs', 'cssmin', 'concat', 'clean:after-build', 'copy', 'processhtml','manifest']);
 
