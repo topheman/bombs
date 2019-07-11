@@ -101,7 +101,7 @@ module.exports = function(grunt) {
             options: {
                 process: true,
                 data: {
-                    "buildNumber": (new Date()).getTime(),
+                    "buildNumber": require('git-rev-sync').short(),
                     "version": version
                 }
             },
