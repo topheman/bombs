@@ -7,6 +7,7 @@
 - now using `<dialog>` instead of `alert()` (with polyfill)
 - generate QrCode client-side
 - remove remoteTilt
+- remove AppCache support (deprecated)
 - now hosting on github pages
 - add deploy task to github pages
 - using yarn

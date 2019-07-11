@@ -100,43 +100,8 @@ module.exports = function(grunt) {
             dist : {
                 files: {
                     'release/index.html' : ['src/index.html'],
-                    'release/game.html' : ['src/game.release.html'],
-                    'release/offline.html' : ['src/offline.html']
+                    'release/game.html' : ['src/game.release.html']
                 }
-            }
-        },
-
-        manifest: {
-            generate: {
-                options: {
-                    basePath: "release/",
-                    cache: [
-                        "game.html",    //the game files
-                        "js/game/bootstrap.js",
-                        "js/index/script.js",
-                        "js/vendor/device-motion-polyfill.js",
-                        "css/game.css",
-                        "css/index.css",
-                        'css/img/orientation-lock.png'
-                    ],
-                    network: [
-                        "http://www.google-analytics.com/ga.js",
-                        "http://www.google-analytics.com/__utm.gif",
-                        "http://*",
-                        "https://*"
-                    ],
-                    fallback: [
-                        "/offline.html"
-                    ],
-                    preferOnline: false,
-                    verbose: true,
-                    timestamp: true
-                },
-                src: [
-                    "assets/img/*.png",
-                    "assets/audio/*.wav"
-                ],
-                dest: "release/manifest.appcache"
             }
         }
 
@@ -159,6 +124,6 @@ module.exports = function(grunt) {
     grunt.registerTask('server-debug', ['my-local-ip:debug', 'connect:debug']);
     grunt.registerTask('server-release', ['my-local-ip:release', 'connect:release']);
 
-    grunt.registerTask('build', ['clean:all', 'requirejs', 'cssmin', 'concat', 'clean:after-build', 'copy', 'processhtml','manifest']);
+    grunt.registerTask('build', ['clean:all', 'requirejs', 'cssmin', 'concat', 'clean:after-build', 'copy', 'processhtml']);
 
 };
