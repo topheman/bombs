@@ -4,15 +4,7 @@ module.exports = function(grunt) {
     require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
     var builderOptions = require('./requirejs.compile.options'),
-        version = require('./package.json').version,
-        gruntSpecificOptions;
-
-    try{
-        gruntSpecificOptions = grunt.file.readJSON('./grunt.options.json');//specific options meant to be split from the hard code of the GruntFile.js
-    }
-    catch(e){
-        grunt.log.error("No grunt.options.json file find (you will need it for ftp-deploy)");
-    }
+        version = require('./package.json').version;
 
     // Configure Grunt
     grunt.initConfig({
@@ -150,21 +142,9 @@ module.exports = function(grunt) {
 
     });
 
-    if(gruntSpecificOptions){
-        grunt.config("ftp-deploy",{
-            release: {
-                auth: {
-                    host: gruntSpecificOptions["ftp-deploy"].release.host,
-                    port: gruntSpecificOptions["ftp-deploy"].release.port,
-                    authKey: 'key1'
-                },
-                src: 'release',
-                dest: gruntSpecificOptions["ftp-deploy"].release.dest,
-                exclusions: ['release/build.txt']
-            }
-        });
-        grunt.registerTask('deploy', ['ftp-deploy:release']);
-    }
+    grunt.registerTask('deploy', function() {
+        grunt.log.error("`grunt deploy` is deprecated, please use `npm run deploy` (to deploy on github pages)");
+    });
 
     function makeLocalIpLog(mode) {
         return function() {

@@ -29,7 +29,7 @@ Now that you've made the installation, you'll have access to different command l
 * [`grunt build`](#grunt-build)
 * [`grunt server`](#grunt-server)
 * [`grunt server-release`](#grunt-server-release)
-* [`grunt deploy`](#grunt-deploy)
+* [`grunt deploy`](#grunt-deploy) - **deprecated**
 
 ### grunt build
 
@@ -64,6 +64,8 @@ You don't have to have an Apache server anymore !
 Same as grunt server, but it will launch the server with `release/` directory as baseUrl.
 
 ### grunt deploy
+
+**DEPRECATED**
 
 * Prerequisite
   * rename `grunt.options.default.json` to `grunt.options.json`
