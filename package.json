@@ -7,7 +7,7 @@
   "scripts": {
     "deploy": "gh-pages -d release"
   },
-  "version": "2.1.0",
+  "version": "3.0.0",
   "dependencies": {},
   "devDependencies": {
     "gh-pages": "^2.0.1",
