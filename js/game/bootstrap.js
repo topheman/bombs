@@ -1884,25 +1884,19 @@ define ('game/GameManager',['game/Stage','vendor/Ball','game/HighScoresManager',
             var self = this;
             self.initDialog();
             Stage.prepareStage(async function(stageCanvas){
-                let accelerometerOK = false
+                accelerometerOK = await self.initMotionListeners();
                 //initialize GameManager canvas var from this closure
                 canvas = stageCanvas;
                 //initialize width/height vars from this closure
                 width   = canvas.width;
                 height  = canvas.height;
-                if (canvas.getContext) {
-                    self.setCanvasRatioForEntities(canvas);
-                    ctx = canvas.getContext("2d");
-                    highScoresManager = new HighScoresManager(HIGH_SCORES_TOP_NUMBER,{localStorageKeyName:HIGH_SCORES_MANAGER_KEY});
-                    self.initOrientationCss();
-                    self.initSounds();
-                    accelerometerOK = await self.initMotionListeners();
-//                    self.initKeyboardListeners();
-                    self.initWelcomeScreens('welcome');
-                }
-                else{
-                    alert("Sorry, your browser doesn't support canvas.\nTopheman Bombs only works with recent browsers.");
-                }
+                self.setCanvasRatioForEntities(canvas);
+                ctx = canvas.getContext("2d");
+                highScoresManager = new HighScoresManager(HIGH_SCORES_TOP_NUMBER,{localStorageKeyName:HIGH_SCORES_MANAGER_KEY});
+                self.initOrientationCss();
+                self.initSounds();
+                // self.initKeyboardListeners();
+                self.initWelcomeScreens('welcome');
                 if (!accelerometerOK) {
                     self.dialog.openModal(`
                         <p><strong>No accelerometer</strong> was detected on your device.</p>
