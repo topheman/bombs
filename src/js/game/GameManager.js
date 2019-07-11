@@ -188,11 +188,6 @@ define (['game/Stage','vendor/Ball','game/HighScoresManager','jQuery','utils/bro
                 window.scrollTo(0, /Android/.test(navigator.userAgent) ? 1 : 0);
             }
 
-            //don't init the game in the remotetilt window
-            if(window.location.href.indexOf('#tiltremote') > -1){
-                return false;
-            }
-
             var self = this;
             self.initDialog();
             Stage.prepareStage(async function(stageCanvas){
@@ -271,21 +266,6 @@ define (['game/Stage','vendor/Ball','game/HighScoresManager','jQuery','utils/bro
         this.initOrientationCss = function(){
             if(browserDetect.isMobileDevice()){
                 $('#orientationlock').bind('touchmove',function(e){e.preventDefault();});
-            }
-            if(location.search === "?emulate"){
-                $('#orientationlock').remove();
-                $('#myCanvas').show();
-                //process the message posted form the remotetilt window (needed to patch a little remotetilt aka device-motion-polyfill.js)
-                var origin = window.location.origin,
-                self = this;
-                remoteTiltWindow.addEventListener("message", function(e){
-                    if(e.origin !== origin){
-                        return;
-                    }
-                    else if(player){
-                        self.addBomb(player);
-                    }
-                }, false);
             }
         };
 
@@ -1323,13 +1303,7 @@ define (['game/Stage','vendor/Ball','game/HighScoresManager','jQuery','utils/bro
         }
 
         function drawTapScreenNotificationMessage(dy){
-            var message = ' TO DROP BOMBS';
-            if(location.search === "?emulate"){
-                message = 'HIT SPACE BAR'+message;
-            }
-            else{
-                message = 'TAP SCREEN'+message;
-            }
+            var message = 'TAP SCREEN TO DROP BOMBS';
             drawCenteredText(message,24,370,0,dy,BOMB_COLOR);
         }
 

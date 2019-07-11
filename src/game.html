@@ -7,17 +7,6 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
         <meta name="apple-touch-fullscreen" content="yes" />
         <meta name=viewport content="width=device-width,user-scalable=no" />
-        <script>
-            //in debug mode, add remote-tilt if we're not on device with an accelerometer
-            (function(){
-                if(location.search === "?emulate"){
-                    var script = document.createElement( 'script' );
-                    script.type = 'text/javascript';
-                    script.src = './js/vendor/device-motion-polyfill.js';
-                    document.head.appendChild(script);
-                }
-            })();
-        </script>
         <link rel="stylesheet" type="text/css" href="./js/vendor/dialog-polyfill.css" />
         <link rel="stylesheet" type="text/css" href="./css/game.css" />
     </head>
