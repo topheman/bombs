@@ -1,5 +1,16 @@
 # Changelog
 
+## 3.0.0 - 2019-07-11
+
+- fixed accelerometer detection
+- alert the user to enable accelerometer ([now blocked by default on safari mobile](https://www.macrumors.com/2019/02/04/ios-12-2-safari-motion-orientation-access-toggle/))
+- now using `<dialog>` instead of `alert()` (with polyfill)
+- generate QrCode client-side
+- remove remoteTilt
+- now hosting on github pages
+- add deploy task to github pages
+- using yarn
+
 ## 2.0.0 - 2013-08-15
 
 - changed the whole code to become __requireJS__ compliant
