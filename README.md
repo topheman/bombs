@@ -10,13 +10,35 @@
 
 Topheman Bombs is a free __HTML5 / Javascript__ game that takes advantage of the canvas element and the accelerometer on your device.
 
-And you can **play offline** (in the subway or whatever ...), or on your **desktop browser via the emulator** !
-
 * Tilt your device to manage the blue dot
 * Tap the screen to drop bombs on the enemies (red dots)
 * Grab the green dots to get more bombs
 
-![Topheman Bombs QR-Code](alternate/bombs-topheman-com-qrcode-bandeau.png)
+# Install / Run / Build
+
+More infos in [GRUNTWORKFLOW.md](GRUNTWORKFLOW.md).
+
+## Install
+
+```
+yarn
+```
+
+Make sure you have `grunt-cli` - otherwise, `npm install -g grunt-cli`
+
+## Run
+
+```
+grunt server
+```
+
+## Build
+
+```
+grunt build
+```
+
+Creates a bundle in the `./release` folder
 
 # Development
 
