@@ -18,11 +18,11 @@
  */
 
 define (['game/Stage','vendor/Ball','game/HighScoresManager','jQuery','utils/browserDetect', 'utils/sensorsChecker'],function(Stage,undefined,HighScoresManager,undefined,browserDetect,sensorsChecker){
-    
+
     var GameManager;
 
     GameManager = function(){
-        
+
         //phonegap (previous version of the game)
         this.appLaunched    = false; //to know if the app has been lauched (is already constructed)
         this.appPaused      = false;
@@ -44,7 +44,7 @@ define (['game/Stage','vendor/Ball','game/HighScoresManager','jQuery','utils/bro
         var DEFAULT_SCORE_MALUS_PER_COLLISION   = 1;
         var DEFAULT_SCORE_BONUS_PER_BOMB        = 4;
         var DEFAULT_SCORE_BONUS_PER_ENEMY       = 2;
-        
+
         var canvasRatioForEntities = 1; //will be changed according to the size of the canvas
 
         //every sizes such as radiuses are defined according to an iphone screen, they are changed by canvasRatioForEntities
@@ -191,7 +191,6 @@ define (['game/Stage','vendor/Ball','game/HighScoresManager','jQuery','utils/bro
             var self = this;
             self.initDialog();
             Stage.prepareStage(async function(stageCanvas){
-                accelerometerOK = await self.initMotionListeners();
                 //initialize GameManager canvas var from this closure
                 canvas = stageCanvas;
                 //initialize width/height vars from this closure
@@ -204,19 +203,12 @@ define (['game/Stage','vendor/Ball','game/HighScoresManager','jQuery','utils/bro
                 self.initSounds();
                 // self.initKeyboardListeners();
                 self.initWelcomeScreens('welcome');
-                if (!accelerometerOK) {
-                    self.dialog.openModal(`
-                        <p><strong>No accelerometer</strong> was detected on your device.</p>
-                        <p>Please activate <strong>"Motion and Orientation"</strong> feature in\nSettings > Safari or Settings > Chrome</p>
-                        <p style="text-align:center;"><button onclick="document.querySelector('dialog').close()">OK</button></p>
-                    `);
-                }
             });
             this.appLaunched = true;
         };
-        
+
         this.setCanvasRatioForEntities = function(canvas){
-            
+
             canvasRatioForEntities = canvas.height/320;
             PLAYER_RADIUS = parseInt(PLAYER_RADIUS*canvasRatioForEntities);
             PLAYER_EXPLODING_RADIUS = parseInt(PLAYER_EXPLODING_RADIUS*canvasRatioForEntities);
@@ -231,7 +223,7 @@ define (['game/Stage','vendor/Ball','game/HighScoresManager','jQuery','utils/bro
             TOUCH_EXPLODING_RADIUS = parseInt(TOUCH_EXPLODING_RADIUS*canvasRatioForEntities);
             TOUCH_OPTIONS.explodingRadius = parseInt(TOUCH_OPTIONS.explodingRadius*canvasRatioForEntities);
             RING_RADIUS = RING_RADIUS*canvasRatioForEntities;
-            
+
         };
 
         /**
@@ -276,11 +268,25 @@ define (['game/Stage','vendor/Ball','game/HighScoresManager','jQuery','utils/bro
         this.initMotionListeners = function(){
 
             return new Promise((res, rej) => {
-                sensorsChecker.checkDeviceorientation(function() {
-                    return res(true)
-                }, function() {
-                    return res(false)
-                })
+                // iOS requests permission
+                if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+                    return DeviceOrientationEvent.requestPermission()
+                    .then(response => {
+                        if (response == 'granted') {
+                            return res(true)
+                        }
+                        else {
+                            return res(false)
+                        }
+                    })
+                }
+                else {
+                    sensorsChecker.checkDeviceorientation(function() {
+                        return res(true)
+                    }, function() {
+                        return res(false)
+                    })
+                }
             }).then(accelerometerOK => {
                 if(window.DeviceOrientationEvent){
                     html5DeviceOrientationSupport = accelerometerOK;
@@ -316,20 +322,20 @@ define (['game/Stage','vendor/Ball','game/HighScoresManager','jQuery','utils/bro
                 }
             })
         };
-        
+
 //        this.initKeyboardListeners = function(){
-//            
+//
 //            $(window).keydown(function(e){
 //                console.info(e);
 //            });
-//            
+//
 //        };
 
         /**
          * Creates getCoordinatesFromEvent function that will manage click/touchstart/touchend events and return an object coordinates
          */
         var getCoordinatesFromEvent;
-        
+
         if(browserDetect.isMobileDevice()){
             getCoordinatesFromEvent = function(e){
                 return {
@@ -427,7 +433,7 @@ define (['game/Stage','vendor/Ball','game/HighScoresManager','jQuery','utils/bro
         this.addWelcomeScreenListeners = function(){
             var self = this;
             var eventTargeted = browserDetect.isMobileDevice() ? 'click' : 'click';
-            $('canvas').bind(eventTargeted,function(e){
+            $('canvas').bind(eventTargeted, async function(e){
                 switch(screenOn){
                     case 'welcome':
                         clearTimeout(welcomeScreensTimer);//cancels the automatic display
@@ -435,6 +441,18 @@ define (['game/Stage','vendor/Ball','game/HighScoresManager','jQuery','utils/bro
                         break;
                     case 'home':
                         if(hasClickedPlayButton({x:e.pageX,y:e.pageY})){
+                            // only bind listeners once
+                            if (!html5DeviceOrientationSupport) {
+                                await self.initMotionListeners();
+                            }
+                            if (!html5DeviceOrientationSupport) {
+                                self.dialog.openModal(`
+                                    <p><strong>No accelerometer</strong> was detected on your device.</p>
+                                    <p>Please activate <strong>"Motion and Orientation"</strong> feature in\nSettings > Safari or Settings > Chrome</p>
+                                    <p style="text-align:center;"><button onclick="document.querySelector('dialog').close()">OK</button></p>
+                                `);
+                                return;
+                            }
                             self.initGame();
                             self.nextLevel();
                         }
@@ -529,7 +547,7 @@ define (['game/Stage','vendor/Ball','game/HighScoresManager','jQuery','utils/bro
 
             if(browserDetect.isMobileDevice()){
                 $('canvas').unbind('touchmove',function(e){e.preventDefault();});
-            }      
+            }
         };
 
         /**
@@ -576,7 +594,7 @@ define (['game/Stage','vendor/Ball','game/HighScoresManager','jQuery','utils/bro
 
         /**
          * Prepares the next level and lauch the loop
-         * 
+         *
          * @param {Boolean} sameLevel If flag to true - will stay on the same level (to use when restarting a level after loosing a life)
          */
         this.nextLevel = function(sameLevel){
@@ -787,7 +805,7 @@ define (['game/Stage','vendor/Ball','game/HighScoresManager','jQuery','utils/bro
         /**
          * @param {Function} drawingFunction
          * @param {Int} duration
-         * 
+         *
          * Adds a drawing callback - drawinbg function 1rst parameter must be line height
          */
         function addFlashMessage(drawingFunction,duration){
@@ -1254,7 +1272,7 @@ define (['game/Stage','vendor/Ball','game/HighScoresManager','jQuery','utils/bro
 
         /**
          * Filps canvas orientation
-         * 
+         *
          * After, use drawCenteredText
          */
         function flipCanvas(){
@@ -1272,7 +1290,7 @@ define (['game/Stage','vendor/Ball','game/HighScoresManager','jQuery','utils/bro
 
         /**
          * Draws text accounting the orientation of canvas
-         * 
+         *
          * @param {String} text
          * @param {Int} fontSize
          * @param {Int} textBlockWidth
@@ -1520,5 +1538,5 @@ define (['game/Stage','vendor/Ball','game/HighScoresManager','jQuery','utils/bro
     };
 
     return GameManager;
-    
+
 });
