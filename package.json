@@ -5,7 +5,9 @@
     "url": "https://github.com/topheman/bombs"
   },
   "scripts": {
-    "deploy": "gh-pages -d release"
+    "deploy": "gh-pages -d release",
+    "forward": "ssh -R 80:localhost:9002 ssh.localhost.run",
+    "serve": "npx serve release -l 9002"
   },
   "version": "3.0.0",
   "dependencies": {},
@@ -24,6 +26,7 @@
     "grunt-open": ">=0.2.0",
     "grunt-processhtml": "~0.1.0",
     "matchdep": ">=0.1.1",
-    "my-local-ip": "^1.0.0"
+    "my-local-ip": "^1.0.0",
+    "serve": "^11.3.2"
   }
 }
